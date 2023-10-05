@@ -1,0 +1,22 @@
+CC = gcc -Wall -Wextra -Werror
+SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c
+OBJS = $(SRCS:.c=.o)
+NAME = libft.a
+
+.PHONY: all re clean fclean
+
+all : $(NAME)
+
+.c.o : %.c libft.h
+	$(CC) -c $<
+
+$(NAME) : $(OBJS)
+	ar rc $@ $^
+
+clean :
+	rm -f $(OBJS)
+
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
