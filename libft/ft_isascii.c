@@ -6,9 +6,11 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:36:34 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/10/05 15:39:00 by jeongbel         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:15:43 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isascii(int c)
 {

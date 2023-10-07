@@ -6,9 +6,11 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:04:16 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/10/05 16:15:34 by jeongbel         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:15:58 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isprint(int c)
 {
