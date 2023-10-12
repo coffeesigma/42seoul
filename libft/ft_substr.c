@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:09:40 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/10/08 18:28:46 by jeongbel         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:22:56 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 	char	*sub;
 
-	if (ft_strlen(s) > len)
+	if (ft_strlen(s) > len + start)
 		sub = (char *)malloc(sizeof(char) * (len + 1));
+	else if (ft_strlen(s) > start)
+		sub = (char *)malloc(sizeof(char) * (ft_strlen(s) - start + 1));
 	else
-		sub = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+		sub = (char *)malloc(sizeof(char));
 	if (!sub)
 		return (0);
 	i = 0;
