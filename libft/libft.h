@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:40:57 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/10/12 16:37:20 by jeongbel         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:06:56 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
+char	*ft_itoa(int n);
 
 #endif

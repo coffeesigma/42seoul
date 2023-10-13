@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:23:44 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/10/12 18:02:50 by jeongbel         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:37:21 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,10 @@ static int	free_mem(char **arr, size_t row)
 	if (!arr[row])
 	{
 		is_null = 1;
-		i = 0;
-		while (i < row)
-		{
+		i = -1;
+		while (++i < row)
 			if (arr[i])
 				free(arr[i]);
-			i++;
-		}
 		free(arr);
 	}
 	return (is_null);
