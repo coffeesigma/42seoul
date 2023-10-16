@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:37:15 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/10/07 21:14:10 by jeongbel         ###   ########.fr       */
+/*   Updated: 2023/10/16 23:50:28 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strrchr(const char *s, int c)
 			return ((char *)s + point);
 		point--;
 	}
-	if ((unsigned char)c == *(s + point))
+	if ((char)c == *s)
 		return ((char *)s);
 	return (0);
 }
