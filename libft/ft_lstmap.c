@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 22:33:42 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/10/16 13:44:36 by jeongbel         ###   ########.fr       */
+/*   Updated: 2023/10/17 01:35:44 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		if (!temp_lst)
 		{
 			ft_lstclear(&new_lst, (*del));
-			free(temp_content);
+			(*del)(temp_content);
 			return (0);
 		}
 		now_lst = now_lst->next;
