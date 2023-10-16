@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 22:15:57 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/10/16 13:49:39 by jeongbel         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:02:53 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-    if (!lst)
-        return ;
+	if (!lst)
+		return ;
 	(*del)(lst->content);
 	free(lst);
 }
