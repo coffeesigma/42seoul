@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 13:50:07 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/01/30 00:13:54 by jeongbel         ###   ########.fr       */
+/*   Created: 2024/01/30 02:11:18 by jeongbel          #+#    #+#             */
+/*   Updated: 2024/01/30 03:28:37 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -77,4 +77,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		sub[i] = s[start + i];
 	sub[i] = '\0';
 	return (sub);
+}
+
+t_line_lst	*ft_lstnew(int fd)
+{
+	t_line_lst	*new_node;
+
+	new_node = (t_line_lst *)malloc(sizeof(t_line_lst));
+	if (!new_node)
+		return (0);
+	new_node->line = 0;
+	new_node->fd = fd;
+	new_node->next = 0;
+	return (new_node);
 }
