@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_util.c                               :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 13:50:07 by jeongbel          #+#    #+#             */
-/*   Updated: 2023/11/09 21:10:20 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:51:45 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+size_t	ft_strlen(const char *s)
+{
+	size_t	size;
+
+	size = 0;
+	if (!s)
+		return (0);
+	while (s[size])
+		size++;
+	return (size);
+}
+
+char	*ft_strjoin(const char *s1, const char *s2, const size_t read_size)
 {
 	char	*join;
 	size_t	i;
 
-	join = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (ft_strlen(s1) + read_size <= 0)
+		return (0);
+	join = (char *)malloc(sizeof(char) * (ft_strlen(s1) + read_size + 1));
 	if (!join)
 		return (0);
 	i = 0;
@@ -26,13 +40,13 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		join[i] = s1[i];
 		i++;
 	}
-	while (i < ft_strlen(s1) + ft_strlen(s2))
+	while (i < ft_strlen(s1) + read_size)
 	{
 		join[i] = s2[i - ft_strlen(s1)];
 		i++;
 	}
 	join[i] = '\0';
-	return (join);
+	return (join); 
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -40,6 +54,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 	char	*sub;
 
+	if (!s)
+		return (0);
+	if (s[len + start] == '\n')
+		len++;
+	if (!len)
+		return (0);
 	if (ft_strlen(s) > len + start)
 		sub = (char *)malloc(sizeof(char) * (len + 1));
 	else if (ft_strlen(s) > start)
