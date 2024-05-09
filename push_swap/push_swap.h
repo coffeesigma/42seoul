@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:52:42 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/08 16:03:53 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:01:26 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include "libft/libft.h"
 
 void	exit_error(void);
-char	*make_arr(t_list *stack);
-void	bubble_sort(int *arr);
+int		*make_arr(t_list *stack);
+void	bubble_sort(int *arr, size_t len);
+int		is_sorted(t_list *stack);
+void	print_op(t_list *op_set);
 int		ctoi(char *content);
 void	stack_add(t_list **stack, char **content);
 t_list	*make_stack(int argc, char **argv);
@@ -28,6 +30,7 @@ void	stack_swap(t_list **stack);
 void	stack_push(t_list **stack_out, t_list **stack_in);
 void	stack_rotate(t_list **stack);
 void	stack_rotate_reverse(t_list **stack);
-void	operate(t_list **stack_a, t_list **stack_b, char *op);
+void	operate(t_list **stack_a, t_list **stack_b, t_list **op_set, char *op);
+void	sort_lower(t_list **stack_a, t_list **stack_b, t_list **op_set);
 
 #endif

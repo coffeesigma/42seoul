@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:07:25 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/08 14:14:18 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:49:09 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,14 @@ static void	operate_solo(t_list **stack_a, t_list **stack_b, char *op)
 		exit_error();
 }
 
-void	operate(t_list **stack_a, t_list **stack_b, char *op)
+void	operate(t_list **stack_a, t_list **stack_b, t_list **op_set, char *op)
 {
+	t_list	*new_op;
+
+	new_op = ft_lstnew(op);
+	if (!new_op)
+		exit_error();
+	ft_lstadd_back(op_set, new_op);
 	if (!ft_strcmp(op, "ss"))
 	{
 		stack_swap(stack_a);

@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:50:48 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/08 17:38:58 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:31:57 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exit_error(void)
 	exit(1);
 }
 
-char	*make_arr(t_list *stack)
+int	*make_arr(t_list *stack)
 {
 	int		*arr;
 	size_t	len;
@@ -36,14 +36,12 @@ char	*make_arr(t_list *stack)
 	return (arr);
 }
 
-void	bubble_sort(int *arr)
+void	bubble_sort(int *arr, size_t len)
 {
 	size_t	i;
 	size_t	j;
-	size_t	len;
 	int		tmp;
 
-	len = ft_strlen(arr);
 	i = len - 1;
 	while (i > 0)
 	{
@@ -64,11 +62,21 @@ void	bubble_sort(int *arr)
 
 int	is_sorted(t_list *stack)
 {
-	while (stack)
+	while (stack->next)
 	{
 		if (*(int *)(stack->content) > *(int *)(stack->next->content))
 			return (0);
 		stack = stack->next;
 	}
 	return (1);
+}
+
+void	print_op(t_list *op_set)
+{
+	while (op_set)
+	{
+		write(1, op_set->content, ft_strlen(op_set->content));
+		write(1, "\n", 1);
+		op_set = op_set->next;
+	}
 }
