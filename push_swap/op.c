@@ -6,13 +6,13 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:07:25 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/09 14:49:09 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/10 00:37:52 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int				i;
 	unsigned char	s1val;

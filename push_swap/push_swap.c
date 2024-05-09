@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:52:05 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/09 17:03:00 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/10 02:28:15 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	main(int argc, char **argv)
     print_stack(stack_b);
 	//sorted_arr = make_arr(stack_a);
 	//bubble_sort(sorted_arr);
+	//optimize_op(&op_set);
     print_op(op_set);
-    atexit(check_leak);
+    //atexit(check_leak);
+	exit(0);
     return (0);
 }

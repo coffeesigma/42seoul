@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:52:42 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/09 17:01:26 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/10 01:34:05 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	stack_swap(t_list **stack);
 void	stack_push(t_list **stack_out, t_list **stack_in);
 void	stack_rotate(t_list **stack);
 void	stack_rotate_reverse(t_list **stack);
+int		ft_strcmp(char *s1, char *s2);
 void	operate(t_list **stack_a, t_list **stack_b, t_list **op_set, char *op);
+void	optimize_op(t_list **op_set);
+void	optimize_rotate(t_list **stack_a, t_list **stack_b, t_list **op_set);
 void	sort_lower(t_list **stack_a, t_list **stack_b, t_list **op_set);
 
 #endif
