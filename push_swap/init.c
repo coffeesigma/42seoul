@@ -6,13 +6,13 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:54:48 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/07 09:34:08 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/10 08:02:28 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ctoi(char *content)
+static int	ctoi(char *content)
 {
 	size_t		i;
 	int			sign;
@@ -40,7 +40,7 @@ int	ctoi(char *content)
 	return (number);
 }
 
-int	stack_check_dup(t_list *stack, int content_num)
+static int	stack_check_dup(t_list *stack, int content_num)
 {
 	while (stack)
 	{
@@ -51,7 +51,7 @@ int	stack_check_dup(t_list *stack, int content_num)
 	return (0);
 }
 
-void	stack_add(t_list **stack, char **content)
+static void	stack_add(t_list **stack, char **content)
 {
 	t_list	*new_node;
 	int		*content_num;

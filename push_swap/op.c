@@ -6,29 +6,11 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:07:25 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/10 00:37:52 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/10 04:53:22 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int				i;
-	unsigned char	s1val;
-	unsigned char	s2val;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		s1val = s1[i];
-		s2val = s2[i];
-		if (s1val != s2val)
-			return ((int)(s1val - s2val));
-		i++;
-	}
-	return (0);
-}
 
 static void	operate_solo(t_list **stack_a, t_list **stack_b, char *op)
 {
@@ -47,7 +29,7 @@ static void	operate_solo(t_list **stack_a, t_list **stack_b, char *op)
 	else if (!ft_strcmp(op, "rra"))
 		stack_rotate_reverse(stack_a);
 	else if (!ft_strcmp(op, "rrb"))
-		stack_rotate_reverse(stack_a);
+		stack_rotate_reverse(stack_b);
 	else
 		exit_error();
 }

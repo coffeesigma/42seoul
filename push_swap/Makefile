@@ -2,8 +2,9 @@ CC = cc -Wall -Wextra -Werror
 LIB_DIR = ./libft
 LIB = libft.a
 HEADER = push_swap.h
-SRCS = push_swap.c init.c utils.c stack.c op.c sort_lower.c sort_utils.c
-SRCS_B = 
+HEADER_B = checker.h
+SRCS = push_swap.c init.c utils.c utils2.c stack.c op.c sort_lower.c sort.c sort_utils.c optimize.c
+SRCS_B = checker.c
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
 NAME = push_swap

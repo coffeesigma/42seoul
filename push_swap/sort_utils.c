@@ -5,61 +5,138 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/10 00:29:29 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/10 02:21:13 by jeongbel         ###   ########.fr       */
+/*   Created: 2024/05/10 07:48:23 by jeongbel          #+#    #+#             */
+/*   Updated: 2024/05/10 14:48:53 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	optimize_op(t_list **op_set)
-{
-	t_list	*now_op;
-	t_list	*comb_op;
-
-	if (stacklen(*op_set) < 2)
-		return ;
-	now_op = *op_set;
-	while (now_op->next)
-	{
-		comb_op = now_op->next;
-		if ((!ft_strcmp(now_op->content, "sa") && !ft_strcmp(comb_op->content, "sb")) || (!ft_strcmp(now_op->content, "sb") && !ft_strcmp(comb_op->content, "sa")))
-			now_op->content = "ss";
-		else if ((!ft_strcmp(now_op->content, "ra") && !ft_strcmp(comb_op->content, "rb")) || (!ft_strcmp(now_op->content, "rb") && !ft_strcmp(comb_op->content, "ra")))
-			now_op->content = "rr";
-		else if ((!ft_strcmp(now_op->content, "rra") && !ft_strcmp(comb_op->content, "rrb")) || (!ft_strcmp(now_op->content, "rrb") && !ft_strcmp(comb_op->content, "rra")))
-			now_op->content = "rrr";
-		else
-		{
-			now_op = now_op->next;
-			continue;
-		}
-		now_op->next = comb_op->next;
-		ft_lstdelone(comb_op, free);
-		now_op = now_op->next;
-	}
-}
-
-void	optimize_rotate(t_list **stack_a, t_list **stack_b, t_list **op_set)
+size_t	find_order(int *sorted_arr, int find, size_t len)
 {
 	size_t	i;
-	t_list	*now;
 
 	i = 0;
-	now = *stack_a;
-	if (stacklen(*stack_a) < 2)
-		return ;
-	while (now->next)
+	while (i < len)
 	{
-		i++;
-		if (*(int *)now->content > *(int *)now->next->content)
+		if (sorted_arr[i] == find)
 			break ;
-		now = now->next;
+		i++;
 	}
-	if (i > stacklen(*stack_a) - i)
-		while (!is_sorted(*stack_a))
-			operate(stack_a, stack_b, op_set, "rra");
-	else
-		while (!is_sorted(*stack_a))
-			operate(stack_a, stack_b, op_set, "ra");
+	return (i);
+}
+
+int	order_distance(int a, int b, int *sorted_arr, size_t len)
+{
+	size_t a_order;
+	size_t b_order;
+
+	a_order = find_order(sorted_arr, a, len);
+	b_order = find_order(sorted_arr, b, len);
+	return (a - b);
+}
+
+int	min_dist(int arr[3])
+{
+	int	min;
+	int	i;
+
+	min = 2147483647;
+	i = 0;
+	while (i < 3)
+	{
+		if (min > arr[i] && arr[i] > 0)
+			min = arr[i];
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		if (min == arr[i])
+			break;
+		i++;
+	}
+	return (i);
+}
+
+int	min_dist_sorted(int arr[3], int max_a)
+{
+	int	min;
+	int	i;
+
+	min = 2147483647;
+	i = 0;
+	while (i < 3)
+	{
+		if (min > ft_abs(arr[i]) && arr[i] > 0)
+			min = ft_abs(arr[i]);
+		if (min > ft_abs(arr[i] + max_a) && arr[i] + max_a < 0)
+			min = ft_abs(arr[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		if (min == ft_abs(arr[i]))
+			break;
+		i++;
+	}
+	return (i);
+}
+
+int	min_dist_r(int arr[3])
+{
+	int	min;
+	int	i;
+
+	min = 2147483647;
+	i = 0;
+	while (i < 3)
+	{
+		if (min > ft_abs(arr[i]))
+			min = ft_abs(arr[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		if (min == ft_abs(arr[i]))
+			break;
+		i++;
+	}
+	return (i);
+}
+
+void	select_pa(t_list **stack_a, t_list **stack_b, t_list **op_set, int n)
+{
+	if (n == 1)
+	{
+		if (ft_strcmp(ft_lstlast(*op_set)->content, "sa"))
+			operate(stack_a, stack_b, op_set, "sb");
+		else
+			operate(stack_a, stack_b, op_set, "rb");
+	}
+	if (n == 2)
+		operate(stack_a, stack_b, op_set, "rrb");
+	if (n == 0 || n == 1 || n == 2)
+		operate(stack_a, stack_b, op_set, "pa");
+}
+
+void	select_ra(t_list **stack_a, t_list **stack_b, t_list **op_set, int n)
+{
+	int	i;
+	
+	i = 0;
+	while (i > n)
+	{
+		operate(stack_a, stack_b, op_set, "ra");
+		i--;
+	}
+	i = 0;
+	while (i < n - 1)
+	{
+		operate(stack_a, stack_b, op_set, "rra");
+		i++;
+	}
+	operate(stack_a, stack_b, op_set, "pa");
 }

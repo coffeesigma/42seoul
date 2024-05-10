@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:50:48 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/09 16:31:57 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/10 07:06:59 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	*make_arr(t_list *stack)
 
 	len = stacklen(stack);
 	arr = (int *)malloc(sizeof(int) * len);
+	if (!arr)
+		exit_error();
 	i = 0;
 	while (i < len)
 	{
@@ -56,7 +58,7 @@ void	bubble_sort(int *arr, size_t len)
 			}
 			j++;
 		}
-		i++;
+		i--;
 	}
 }
 

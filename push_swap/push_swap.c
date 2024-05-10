@@ -6,28 +6,15 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:52:05 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/10 02:28:15 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:26:31 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-#include <stdio.h>
-
 void	check_leak(void)
 {
 	system("leaks push_swap");
-}
-
-void	print_stack(t_list *stack)
-{
-	while (stack)
-    {
-		int *k = stack->content;
-		printf("%d ", *k);
-		stack = stack->next;
-	}
-	printf("\n");
 }
 
 int	main(int argc, char **argv)
@@ -37,19 +24,16 @@ int	main(int argc, char **argv)
 	t_list	*op_set;
 	//int		*sorted_arr;
 
-    op_set = 0;
+	op_set = 0;
 	stack_a = make_stack(argc, argv);
 	stack_b = 0;
-    print_stack(stack_a);
-    print_stack(stack_b);
-    sort_lower(&stack_a, &stack_b, &op_set);
-    print_stack(stack_a);
-    print_stack(stack_b);
-	//sorted_arr = make_arr(stack_a);
-	//bubble_sort(sorted_arr);
-	//optimize_op(&op_set);
-    print_op(op_set);
-    //atexit(check_leak);
+	if (stacklen(stack_a) < 6)
+		sort_lower(&stack_a, &stack_b, &op_set);
+	else
+		sort_stack(&stack_a, &stack_b, &op_set);
+	optimize_op(&op_set);
+	print_op(op_set);
+	//atexit(check_leak);
 	exit(0);
-    return (0);
+	return (0);
 }
