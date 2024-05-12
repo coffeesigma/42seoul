@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/24 19:52:05 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/12 22:00:29 by jeongbel         ###   ########.fr       */
+/*   Created: 2024/05/10 20:00:39 by jeongbel          #+#    #+#             */
+/*   Updated: 2024/05/12 21:56:31 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_list	*op_set;
+	int				i;
+	unsigned char	s1val;
+	unsigned char	s2val;
 
-	op_set = 0;
-	stack_a = make_stack(argc, argv);
-	stack_b = 0;
-	if (!stacklen(stack_a))
-		exit(0);
-	stack_to_order(&stack_a);
-	if (stacklen(stack_a) < 6)
-		sort_lower(&stack_a, &stack_b, &op_set);
-	else
-		sort_stack(&stack_a, &stack_b, &op_set);
-	optimize_op(&op_set);
-	print_op(op_set);
-	exit(0);
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		s1val = s1[i];
+		s2val = s2[i];
+		if (s1val != s2val)
+			return ((int)(s1val - s2val));
+		i++;
+	}
 	return (0);
 }

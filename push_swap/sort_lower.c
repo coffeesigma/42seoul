@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:09:10 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/10 14:01:54 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/12 21:28:58 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ static void	sort_stack_3(t_list **a, t_list **b, t_list **op_set)
 		operate(a, b, op_set, "rra");
 	else
 	{
-		operate(a, b, op_set, "ra");
-		operate(a, b, op_set, "sa");
 		operate(a, b, op_set, "rra");
+		operate(a, b, op_set, "sa");
 	}
 }
 
@@ -66,20 +65,26 @@ static void	sort_stack_4(t_list **stack_a, t_list **stack_b, t_list **op_set)
 
 static void	sort_stack_5(t_list **stack_a, t_list **stack_b, t_list **op_set)
 {
-	operate(stack_a, stack_b, op_set, "pb");
-	operate(stack_a, stack_b, op_set, "pb");
+	int	i;
+
+	i = 0;
+	while (i < 2)
+	{
+		if (*(int *)(*stack_a)->content < 2)
+		{
+			operate(stack_a, stack_b, op_set, "pb");
+			i++;
+		}
+		if (*(int *)ft_lstlast(*stack_a)->content < 2)
+			operate(stack_a, stack_b, op_set, "rra");
+		else
+			operate(stack_a, stack_b, op_set, "ra");
+	}
 	if (!is_sorted(*stack_a))
 		sort_stack_3(stack_a, stack_b, op_set);
-	if (!is_sorted(*stack_b))
+	if (is_sorted(*stack_b))
 		sort_stack_2_b(stack_a, stack_b, op_set);
-	while (*(int *)(*stack_a)->content < *(int *)(*stack_b)->content
-		&& max_num(*stack_a) > *(int *)(*stack_b)->content)
-		operate(stack_a, stack_b, op_set, "ra");
 	operate(stack_a, stack_b, op_set, "pa");
-	optimize_rotate(stack_a, stack_b, op_set);
-	while (*(int *)(*stack_a)->content < *(int *)(*stack_b)->content
-		&& max_num(*stack_a) > *(int *)(*stack_b)->content)
-		operate(stack_a, stack_b, op_set, "ra");
 	operate(stack_a, stack_b, op_set, "pa");
 	optimize_rotate(stack_a, stack_b, op_set);
 }

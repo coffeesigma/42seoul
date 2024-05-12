@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:54:48 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/10 08:02:28 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/11 01:09:52 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,21 @@ t_list	*make_stack(int argc, char **argv)
 		free(content);
 	}
 	return (new_stack);
+}
+
+void	stack_to_order(t_list **stack)
+{
+	t_list	*now;
+	int		*sorted_arr;
+
+	sorted_arr = make_arr(*stack);
+	bubble_sort(sorted_arr, stacklen(*stack));
+	now = *stack;
+	while (now)
+	{
+		*(int *)(now->content)
+			= find_order(sorted_arr, *(int *)(now->content), stacklen(*stack));
+		now = now->next;
+	}
+	free(sorted_arr);
 }

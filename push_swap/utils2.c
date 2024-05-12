@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 04:22:16 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/10 08:14:12 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/11 00:39:18 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,18 @@ int	min_num(t_list *stack)
 	return (min);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_min(int a, int b)
 {
-	int				i;
-	unsigned char	s1val;
-	unsigned char	s2val;
+	if (a < b)
+		return (a);
+	return (b);
+}
 
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		s1val = s1[i];
-		s2val = s2[i];
-		if (s1val != s2val)
-			return ((int)(s1val - s2val));
-		i++;
-	}
-	return (0);
+int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }
 
 int	ft_abs(int a)

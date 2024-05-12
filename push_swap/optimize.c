@@ -6,11 +6,21 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 00:29:29 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/10 05:17:30 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/12 21:52:58 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	change_op(t_list *node, char *content)
+{
+	t_list	*del;
+
+	del = node->next;
+	node->content = content;
+	node->next = del->next;
+	free(del);
+}
 
 void	optimize_op(t_list **op_set)
 {
@@ -25,16 +35,13 @@ void	optimize_op(t_list **op_set)
 		d = n->next;
 		if (!(ft_strcmp(n->content, "sa") || ft_strcmp(d->content, "sb"))
 			|| !(ft_strcmp(n->content, "sb") || ft_strcmp(d->content, "sa")))
-			n->content = "ss";
+			change_op(n, "ss");
 		else if (!(ft_strcmp(n->content, "ra") || ft_strcmp(d->content, "rb"))
 			|| !(ft_strcmp(n->content, "rb") || ft_strcmp(d->content, "ra")))
-			n->content = "rr";
+			change_op(n, "rr");
 		else if (!(ft_strcmp(n->content, "rra") || ft_strcmp(d->content, "rrb"))
 			|| !(ft_strcmp(n->content, "rrb") || ft_strcmp(d->content, "rra")))
-			n->content = "rrr";
-		else
-			d = n;
-		n->next = d->next;
+			change_op(n, "rrr");
 		n = n->next;
 	}
 }

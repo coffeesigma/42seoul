@@ -6,44 +6,102 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 05:33:27 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/10 15:00:54 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/05/12 20:51:57 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// #include <stdio.h>
-// static void	print_stack(t_list *stack)
-// {
-// 	while (stack)
-// 	{
-// 		int	*k = stack->content;
-// 		printf("%d ", *k);
-// 		stack = stack->next;
-// 	}
-// 	printf("\n");
-// }
-
-static int	*set_pivot(int *sorted_arr, size_t len)
+static void	do_op(t_list **stack_a, t_list **stack_b, t_list **op_set,
+	int do_rotate[2])
 {
-	int		*pivot;
+	int	ra_num;
+	int	rb_num;
+	int	i;
 
-	pivot = (int *)malloc(sizeof(int) * 2);
-	if (!pivot)
-		exit_error();
-	pivot[0] = sorted_arr[len / 3];
-	pivot[1] = sorted_arr[(len / 3) * 2];
-	return (pivot);
+	ra_num = ft_abs(do_rotate[0]);
+	rb_num = ft_abs(do_rotate[1]);
+	i = 0;
+	while (i < ra_num || i < rb_num)
+	{
+		if (do_rotate[0] < 0 && i < ra_num)
+			operate(stack_a, stack_b, op_set, "rra");
+		if (do_rotate[0] > 0 && i < ra_num)
+			operate(stack_a, stack_b, op_set, "ra");
+		if (do_rotate[1] < 0 && i < rb_num)
+			operate(stack_a, stack_b, op_set, "rrb");
+		if (do_rotate[1] > 0 && i < rb_num)
+			operate(stack_a, stack_b, op_set, "rb");
+		i++;
+	}
+	operate(stack_a, stack_b, op_set, "pa");
 }
 
-static void	push_b(t_list **stack_a, t_list **stack_b, t_list **op_set, int *pivot)
+static void	decide_op(t_list **stack_a, t_list **stack_b, t_list **op_set,
+	int rotate[2])
 {
-	while (min_num(*stack_a) <= pivot[1])
+	int	len_a;
+	int	len_b;
+	int	min;
+	int	do_rotate[2];
+
+	len_a = stacklen(*stack_a);
+	len_b = stacklen(*stack_b);
+	min = op_count(rotate[0], rotate[1], len_a, len_b);
+	do_rotate[0] = rotate[0];
+	do_rotate[1] = rotate[1];
+	if (ft_max(len_a - rotate[0], len_b - rotate[1]) == min)
 	{
-		if (*(int *)(*stack_a)->content <= pivot[1])
+		do_rotate[0] = rotate[0] - len_a;
+		do_rotate[1] = rotate[1] - len_b;
+	}
+	else if (rotate[0] + len_b - rotate[1] == min)
+		do_rotate[1] = rotate[1] - len_b;
+	else if (len_a - rotate[0] + rotate[1] == min)
+		do_rotate[0] = rotate[0] - len_a;
+	do_op(stack_a, stack_b, op_set, do_rotate);
+}
+
+static void	push_a(t_list **stack_a, t_list **stack_b, t_list **op_set)
+{
+	t_list	*now;
+	int		min;
+	int		b;
+	int		rotate[2];
+
+	while (stacklen(*stack_b))
+	{
+		min = 2147483647;
+		now = *stack_b;
+		while (now)
+		{
+			if (min > find_min_op(*stack_a, *stack_b, *(int *)now->content))
+			{
+				min = find_min_op(*stack_a, *stack_b, *(int *)now->content);
+				b = *(int *)now->content;
+			}
+			now = now->next;
+		}
+		rotate[0] = find_ra(*stack_a, b);
+		rotate[1] = find_rb(*stack_b, b);
+		decide_op(stack_a, stack_b, op_set, rotate);
+	}
+	optimize_rotate(stack_a, stack_b, op_set);
+}
+
+static void	push_b(t_list **stack_a, t_list **stack_b, t_list **op_set)
+{
+	int	pivot1;
+	int	pivot2;
+
+	pivot1 = stacklen(*stack_a) / 3;
+	pivot2 = pivot1 * 2;
+	while (min_num(*stack_a) <= pivot2)
+	{
+		if (*(int *)(*stack_a)->content <= pivot2)
 		{
 			operate(stack_a, stack_b, op_set, "pb");
-			if (*(int *)(*stack_b)->content > pivot[0])
+			if (*(int *)(*stack_b)->content > pivot1)
 				operate(stack_a, stack_b, op_set, "rb");
 		}
 		else
@@ -54,64 +112,10 @@ static void	push_b(t_list **stack_a, t_list **stack_b, t_list **op_set, int *piv
 	sort_lower(stack_a, stack_b, op_set);
 }
 
-static void	push_a(t_list **stack_a, t_list **stack_b, t_list **op_set, int *arr, size_t len)
-{
-	int	dist[3];
-	int	min_node;
-	int	min_node_sorted;
-
-	while (stacklen(*stack_b) > 2)
-	{
-		// print_stack(*stack_a);
-		// print_stack(*stack_b);
-		dist[0] = order_distance(*(int *)(*stack_a)->content, *(int *)(*stack_b)->content, arr, len);
-		dist[1] = order_distance(*(int *)(*stack_a)->content, *(int *)(*stack_b)->next->content, arr, len);
-		dist[2] = order_distance(*(int *)(*stack_a)->content, *(int *)ft_lstlast(*stack_b)->content, arr, len);
-		min_node = min_dist(dist);
-		min_node_sorted = min_dist_sorted(dist, max_num(*stack_a) - min_num(*stack_a));
-		if (*(int *)(*stack_a)->content != min_num(*stack_a) && min_node < 3
-			&& dist[min_node] < order_distance(*(int *)(*stack_a)->content, *(int *)ft_lstlast(*stack_a)->content, arr, len))
-			select_pa(stack_a, stack_b, op_set, min_node);
-		else if (*(int *)(*stack_a)->content == min_num(*stack_a) && min_node_sorted < 3)
-			select_pa(stack_a, stack_b, op_set, min_node_sorted);
-		else
-		{
-			if (*(int *)(*stack_b)->content > max_num(*stack_a))
-				operate(stack_a, stack_b, op_set, "rb");
-			if (dist[min_dist_r(dist)] < 0)
-				operate(stack_a, stack_b, op_set, "ra");
-			else
-				operate(stack_a, stack_b, op_set, "rra");
-		}
-		// printf("%s\n", ft_lstlast(*op_set)->content);
-	}
-	dist[0] = order_distance(*(int *)(*stack_a)->content, *(int *)(*stack_b)->content, arr, len);
-	dist[1] = order_distance(*(int *)(*stack_a)->content, *(int *)(*stack_b)->next->content, arr, len);
-	if (ft_abs(dist[0]) < ft_abs(dist[1]))
-		select_ra(stack_a, stack_b, op_set, dist[0]);
-	else
-	{
-		operate(stack_a, stack_b, op_set, "rb");
-		select_ra(stack_a, stack_b, op_set, dist[1]);
-	}
-	select_ra(stack_a, stack_b, op_set, order_distance(*(int *)(*stack_a)->content, *(int *)(*stack_b)->content, arr, len));
-	// print_stack(*stack_a);
-	// print_stack(*stack_b);
-	optimize_rotate(stack_a, stack_b, op_set);
-}
-
 void	sort_stack(t_list **stack_a, t_list **stack_b, t_list **op_set)
 {
-	int		*pivot;
-	int		*sorted_arr;
-	size_t	len;
-
 	if (is_sorted(*stack_a))
 		return ;
-	len = stacklen(*stack_a);
-	sorted_arr = make_arr(*stack_a);
-	bubble_sort(sorted_arr, len);
-	pivot = set_pivot(sorted_arr, len);
-	push_b(stack_a, stack_b, op_set, pivot);
-	push_a(stack_a, stack_b, op_set, sorted_arr, len);
+	push_b(stack_a, stack_b, op_set);
+	push_a(stack_a, stack_b, op_set);
 }
