@@ -1,14 +1,22 @@
-#include "./mlx/mlx.h"
-#include "./libft/libft.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/29 02:20:42 by jeongbel          #+#    #+#             */
+/*   Updated: 2024/05/29 04:18:15 by jeongbel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int main(void)
+#include "so_long.h"
+
+int	main(int argc, char **argv)
 {
-	void *mlx_ptr;
-	void *win_ptr;
+	t_info	*info;
 
-	printf("%d\n", ft_atoi("344565D"));
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "mlx 42");
-	mlx_loop(mlx_ptr);
+	info = (t_info *)malloc(sizeof(t_info));
+	if (!info || argc != 2)
+		exit_error();
 }
