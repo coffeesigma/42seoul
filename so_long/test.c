@@ -1,4 +1,4 @@
-#include "./mlx_gl/mlx.h"
+#include "./mlx/mlx.h"
 #include "./libft/libft.h"
 #include <stdio.h>
 

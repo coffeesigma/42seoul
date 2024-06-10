@@ -6,11 +6,25 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:45:00 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/05/29 04:16:43 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/10 20:21:24 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+char	*gnl_rm_enter(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (!line)
+		return (0);
+	if (ft_strlen(line) < 1)
+		return (line);
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
+	return (line);
+}
 
 void	map_init(t_info *info, char *filename)
 {
@@ -21,10 +35,21 @@ void	map_init(t_info *info, char *filename)
 	fd = open(filename, O_RDWR);
 	if (fd < 0)
 		exit_error();
-	map = get_next_line(fd);
-	if (ft_strlen(line) < 3)
+	map = gnl_rm_enter(fd);
+	if (ft_strlen(map) < 3)
 		exit_error();
-	info->width = ft_strlen(line) - 1;
-	info->height = 1;
-	info->present = 0;
+	info->width = ft_strlen(map);
+	while (1)
+	{
+		line = gnl_rm_enter(fd);
+		if (!line)
+			break ;
+		map = ft_strjoin_withfree(map, line);
+		if (!map || ft_strlen(line) != info->width)
+			exit_error();
+	}
+	info->height = ft_strlen(map) / info->width;
+	info->map = map;
+	map_check(info);
+	close(fd);
 }
