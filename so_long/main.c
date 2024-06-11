@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:20:42 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/11 15:35:51 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/12 02:52:21 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	filename_check(char *filename)
 	len = ft_strlen(filename);
 	if (len < 5)
 		exit_error();
-	if (!(filename[len - 4] == '.' && filename[len - 3] == 'b' 
-		&& filename[len - 2] == 'e' && filename[len - 1] == 'r'))
+	if (!(filename[len - 4] == '.' && filename[len - 3] == 'b'
+			&& filename[len - 2] == 'e' && filename[len - 1] == 'r'))
 		exit_error();
 }
 
@@ -35,6 +35,8 @@ int	main(int argc, char **argv)
 		exit_error();
 	filename_check(argv[1]);
 	map_init(info, argv[1]);
+	mlx_make(info, mlx);
+	win_make(info, mlx);
 	printf("%s\n", info->map);
 	printf("%zu %zu\n", info->width, info->height);
 	printf("%d\n", info->collect_num);

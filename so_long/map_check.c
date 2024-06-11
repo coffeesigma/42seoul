@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:59:17 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/11 14:45:16 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/12 00:16:44 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	object_check(t_info *info)
 			exit_error();
 		i++;
 	}
-	if  (start != 1 || exit != 1 || info->collect_num == 0)
+	if (start != 1 || exit != 1 || info->collect_num == 0)
 		exit_error();
 }
 

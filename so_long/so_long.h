@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:37:24 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/11 15:40:53 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/12 00:23:03 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "./libft/libft.h"
-# include "./mlx/mlx.h"
+# include "./mlx_gl/mlx.h"
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -38,7 +38,7 @@ typedef struct s_mlx
 	void	*win;
 	void	*tile;
 	void	*wall;
-	void	*character;
+	void	*hero;
 	void	*collect;
 	void	*exit;
 }	t_mlx;
@@ -48,5 +48,8 @@ char	*ft_strjoin_withfree(char *s1, char *s2);
 char	*gnl_rm_enter(int fd);
 void	map_init(t_info *info, char *filename);
 void	map_check(t_info *info);
+void	filename_check(char *filename);
+void	mlx_make(t_info *info, t_mlx *mlx);
+void	win_make(t_info *info, t_mlx *mlx);
 
 #endif
