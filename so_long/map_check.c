@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:59:17 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/10 20:56:39 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:45:16 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,31 @@ static void	outline_check(t_info *info)
 static void	object_check(t_info *info)
 {
 	size_t	i;
-	size_t	j;
-	char	now;
+	int		start;
+	int		exit;
 
 	info->collect_num = 0;
-	i = 1;
-	while (i < info->height - 1)
+	start = 0;
+	exit = 0;
+	i = 0;
+	while (i < ft_strlen(info->map))
 	{
-		j = 1;
-		while (j < info->width - 1)
-		{
-			now = info->map[i * info->width + j];
-			if (now == 'P')
-			{
-				info->start_x = i;
-				info->start_y = j;
-			}
-			else if (now == 'C')
-				info->collect_num++;
-		}
+		if (info->map[i] == 'P')
+			start++;
+		else if (info->map[i] == 'E')
+			exit++;
+		else if (info->map[i] == 'C')
+			info->collect_num++;
+		else if (info->map[i] != '0' && info->map[i] != '1')
+			exit_error();
+		i++;
 	}
-
+	if  (start != 1 || exit != 1 || info->collect_num == 0)
+		exit_error();
 }
 
 void	map_check(t_info *info)
 {
 	outline_check(info);
+	object_check(info);
 }
