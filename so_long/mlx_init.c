@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:36:28 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/12 21:24:30 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/13 03:36:20 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	mlx_make(t_info *i)
 	i->hero = mlx_xpm_file_to_image(i->mlx, "./textures/link.xpm", &w, &h);
 	i->collect = mlx_xpm_file_to_image(i->mlx, "./textures/rupy.xpm", &w, &h);
 	i->exit = mlx_xpm_file_to_image(i->mlx, "./textures/hiral.xpm", &w, &h);
+	if (!i->wall || !i->tile || !i->hero || !i->collect || !i->exit)
+		exit_error();
 }
 
 void	win_make(t_info *info)
