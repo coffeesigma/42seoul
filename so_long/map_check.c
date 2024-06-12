@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:59:17 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/12 18:54:46 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/13 00:57:07 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,30 @@ static void	put_pos(t_info *info)
 	}
 }
 
+static void	map_valid_check(t_info *info)
+{
+	char	*map_copy;
+	int		c;
+	int		e;
+
+	map_copy = ft_strdup(info->map);
+	if (!map_copy)
+		exit_error();
+	c = dfs(info, map_copy, info->start_y * info->width + info->start_x, 'C');
+	free(map_copy);
+	map_copy = ft_strdup(info->map);
+	if (!map_copy)
+		exit_error();
+	e = dfs(info, map_copy, info->start_y * info->width + info->start_x, 'E');
+	free(map_copy);
+	if (c != info->collect_num || e != 1)
+		exit_error();
+}
+
 void	map_check(t_info *info)
 {
 	outline_check(info);
 	object_check(info);
 	put_pos(info);
+	map_valid_check(info);
 }
