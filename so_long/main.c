@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:20:42 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/13 04:35:04 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/13 07:03:27 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ int	main(int argc, char **argv)
 	mlx_hook(info->win, 2, 0, key_press, info);
 	mlx_hook(info->win, KEY_EXIT, 0, key_exit, NULL);
 	mlx_loop(info->mlx);
+	exit(0);
 }
