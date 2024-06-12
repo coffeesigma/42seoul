@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:59:17 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/12 00:16:44 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/12 18:54:46 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	object_check(t_info *info)
 	int		exit;
 
 	info->collect_num = 0;
+	info->count = 0;
 	start = 0;
 	exit = 0;
 	i = 0;
@@ -61,8 +62,30 @@ static void	object_check(t_info *info)
 		exit_error();
 }
 
+static void	put_pos(t_info *info)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < ft_strlen(info->map))
+	{
+		if (info->map[i] == 'P')
+		{
+			info->start_x = i % info->width;
+			info->start_y = i / info->width;
+		}
+		if (info->map[i] == 'E')
+		{
+			info->exit_x = i % info->width;
+			info->exit_y = i / info->width;
+		}
+		i++;
+	}
+}
+
 void	map_check(t_info *info)
 {
 	outline_check(info);
 	object_check(info);
+	put_pos(info);
 }

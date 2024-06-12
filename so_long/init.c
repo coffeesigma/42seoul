@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:45:00 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/12 03:03:44 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/12 18:54:24 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	map_init(t_info *info, char *filename)
 		line = gnl_rm_enter(fd);
 		if (!line)
 			break ;
-		map = ft_strjoin_withfree(map, line);
-		if (!map || ft_strlen(line) != info->width)
+		if (ft_strlen(line) != info->width)
 			exit_error();
+		map = ft_strjoin_withfree(map, line);
 	}
 	info->height = ft_strlen(map) / info->width;
 	info->map = map;

@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:30:06 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/10 20:33:15 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:25:17 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strjoin_withfree(char *s1, char *s2)
 
 	join = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!join)
-		return (0);
+		exit_error();
 	i = 0;
 	while (i < ft_strlen(s1))
 	{
