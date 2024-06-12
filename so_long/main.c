@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:20:42 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/12 19:24:56 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:55:15 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int	main(int argc, char **argv)
 	map_init(info, argv[1]);
 	mlx_make(info);
 	win_make(info);
-	printf("%s\n", info->map);
-	printf("%zu %zu\n", info->width, info->height);
-	printf("%d\n", info->collect_num);
 	mlx_hook(info->win, 2, 1, key_press, info);
 	mlx_loop(info->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:36:28 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/12 19:19:42 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:51:49 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ int	key_press(int keycode, t_info *info)
 	if (keycode == KEY_W)
 		move(info, info->start_x + info->start_y * info->width,
 			info->start_x + (info->start_y - 1) * info->width);
+	if (keycode == KEY_ESC)
+		exit(0);
 	return (0);
 }
