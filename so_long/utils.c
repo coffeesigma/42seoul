@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:30:06 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/13 04:12:23 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/13 05:49:29 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exit_error(void)
 {
-	if (errno)
+	if (errno && errno != 1)
 		perror("Error\n");
 	else
 		write(2, "Error\n", 6);
