@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:36:28 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/13 03:36:20 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/13 04:24:29 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ void	win_make_all_collect(t_info *info)
 	{
 		x = i % info->width;
 		y = i / info->width;
-		if (info->map[i] == '1')
+		if (x == info->exit_x && y == info->exit_y)
+			mlx_put_image_to_window(info->mlx, info->win, info->exit,
+				x * 64, y * 64);
+		else if (info->map[i] == '1')
 			mlx_put_image_to_window(info->mlx, info->win, info->wall,
 				x * 64, y * 64);
 		else if (info->map[i] == '0')
 			mlx_put_image_to_window(info->mlx, info->win, info->tile,
-				x * 64, y * 64);
-		else if (info->map[i] == 'E')
-			mlx_put_image_to_window(info->mlx, info->win, info->exit,
 				x * 64, y * 64);
 		else if (info->map[i] == 'P')
 			mlx_put_image_to_window(info->mlx, info->win, info->hero,

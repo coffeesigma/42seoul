@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:30:06 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/13 00:56:37 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/13 04:12:23 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,10 @@ int	dfs(t_info *info, char *map, size_t pos, char find)
 	count = 0;
 	if (map[pos] == '1')
 		return (0);
-	if (map[pos] == find)
+	if (map[pos] != '1')
 	{
-		map[pos] = '1';
-		return (1);
-	}
-	if (map[pos] == '0' || map[pos] == 'P')
-	{
+		if (map[pos] == find)
+			count++;
 		map[pos] = '1';
 		count += dfs(info, map, pos - 1, find);
 		count += dfs(info, map, pos - info->width, find);

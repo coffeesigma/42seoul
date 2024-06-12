@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:20:42 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/13 00:55:36 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/13 04:35:04 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	filename_check(char *filename)
 		exit_error();
 	if (!(filename[len - 4] == '.' && filename[len - 3] == 'b'
 			&& filename[len - 2] == 'e' && filename[len - 1] == 'r'))
+		exit_error();
+	if (filename[len - 5] == '/')
 		exit_error();
 }
 

@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:29:47 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/06/12 19:31:58 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/06/13 04:27:05 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	move(t_info *info, size_t now, size_t next)
 {
 	if (info->map[next] == 'C')
 		info->collect_num -= 1;
-	if (info->map[next] == 'E' && info->collect_num == 0)
+	if (next == info->exit_x + info->exit_y * info->width
+		&& info->collect_num == 0)
 		exit(0);
 	else if (info->map[next] != '1')
 	{
