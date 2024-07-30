@@ -3,7 +3,7 @@ LIB_DIR = ./libft
 LIB = libft.a
 HEADER_M = mandatory/pipex.h
 HEADER_B = bonus/pipex_bonus.h
-SRCS_M = main.c
+SRCS_M = main.c utils.c cmd.c init.c exec.c
 SRCS_B = main_bonus.c
 OBJS_M = $(addprefix mandatory/, ${SRCS_M:.c=.o})
 OBJS_B = $(addprefix bonus/, ${SRCS_B:.c=.o})
