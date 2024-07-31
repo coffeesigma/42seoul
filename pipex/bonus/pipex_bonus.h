@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:51:57 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/07/31 21:19:48 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:29:09 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
+# include <sys/wait.h>
 
 typedef struct s_cmd
 {
