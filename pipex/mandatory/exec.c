@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:47:33 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/07/31 19:45:26 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/07/31 20:01:50 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	exec_child(t_info *info, int idx)
 static void	exec_cmd(t_info *info)
 {
 	pid_t	pid;
-	
+
 	pid = fork();
 	if (pid == -1)
 		error_exit("fork");
