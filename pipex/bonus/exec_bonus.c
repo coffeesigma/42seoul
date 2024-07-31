@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:47:33 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/07/31 20:01:34 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:19:16 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ static void	exec_child(t_info *info, int idx)
 {
 	if (idx == 0)
 	{
-		dup2(info->in_fd, 0);
+		dup2_with_error(info->in_fd, 0);
 		close(info->in_fd);
 	}
 	else
 	{
-		dup2(info->fds[idx - 1][0], 0);
+		dup2_with_error(info->fds[idx - 1][0], 0);
 		close(info->fds[idx - 1][1]);
 		close(info->fds[idx - 1][0]);
 	}
 	if (idx == info->cmd_num - 1)
 	{
-		dup2(info->out_fd, 1);
+		dup2_with_error(info->out_fd, 1);
 		close(info->out_fd);
 	}
 	else
 	{
-		dup2(info->fds[idx][1], 1);
+		dup2_with_error(info->fds[idx][1], 1);
 		close(info->fds[idx][0]);
 		close(info->fds[idx][1]);
 	}
@@ -71,4 +71,6 @@ void	exec_cmds(t_info *info)
 		exec_cmd(info);
 	while (--info->idx >= 0)
 		wait(NULL);
+	if (info->here_doc)
+		unlink(".here_doc");
 }

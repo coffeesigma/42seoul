@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:51:57 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/07/31 19:48:07 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:19:48 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_cmd
 
 typedef struct s_info
 {
+	int		here_doc;
 	int		idx;
 	int		cmd_num;
 	pid_t	pid;
@@ -36,6 +37,7 @@ typedef struct s_info
 }	t_info;
 
 void	error_exit(char *msg);
+void	dup2_with_error(int oldfd, int newfd);
 void	make_cmd(t_info *info, int argc, char **argv, char **envp);
 void	init_info(t_info *info, int argc, char **argv, char **envp);
 void	exec_cmds(t_info *info);
