@@ -1,7 +1,7 @@
 CC = cc -Wall -Wextra -Werror
 HEADER = philo.h
-SRCS = 
-OBJS = $(SRCS_M:.c=.o)
+SRCS = init.c utils.c utils2.c main.c philo.c simulation.c
+OBJS = $(SRCS:.c=.o)
 NAME = philo
 
 .PHONY: all re clean fclean re bonus
@@ -9,10 +9,10 @@ NAME = philo
 all : $(NAME)
 
 .c.o : %.c $(HEADER)
-	$(CC) -c $< -o ${<:.c=.o} -lpthread
+	$(CC) -c $< -o ${<:.c=.o}
 
 $(NAME) : $(OBJS)
-	$(CC) -o $@ $(OBJS)
+	$(CC) -o $@ $(OBJS) -lpthread
 
 clean :
 	rm -f $(OBJS)
