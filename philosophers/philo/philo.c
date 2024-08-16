@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 06:34:51 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 10:40:31 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:32:46 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	philo_eat(t_philo *philo)
 	else
 		pthread_mutex_lock(philo->left_fork);
 	philo_printf(philo, "has taken a fork");
+	if (philo->info->num_of_philos == 1)
+		return (1);
 	if (philo->id % 2)
 		pthread_mutex_lock(philo->left_fork);
 	else
@@ -50,7 +52,7 @@ static int	philo_think(t_philo *philo)
 static int	philo_is_full(t_philo *philo)
 {
 	if (philo->info->num_of_must_eat != -1
-		&& philo->eat_count >= philo->info->num_of_must_eat)
+		&& philo->eat_count == philo->info->num_of_must_eat)
 	{
 		pthread_mutex_lock(&philo->info->full);
 		philo->info->is_full++;
@@ -65,14 +67,19 @@ void	*philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2)
+	if (philo->id % 2 == 0)
 		usleep(500);
 	while (check_is_dead(philo->info) == 0)
 	{
-		philo_eat(philo);
-		if (philo_is_full(philo))
-			break ;
+		if (philo_eat(philo))
+		{
+			pthread_mutex_unlock(philo->right_fork);
+			return (NULL);
+		}
+		philo_is_full(philo);
+		usleep(50);
 		philo_sleep(philo);
+		usleep(50);
 		philo_think(philo);
 	}
 	return (NULL);

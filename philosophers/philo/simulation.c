@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 09:24:38 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 10:43:05 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:48:37 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,16 @@ static void	monitor(t_philo *philos, t_info *info)
 		{
 			if (philo_is_dead(&philos[i]))
 				return ;
+			pthread_mutex_lock(&info->full);
 			if (info->is_full == info->num_of_philos)
+			{
+				pthread_mutex_lock(&info->dead);
+				info->is_dead = 1;
+				pthread_mutex_unlock(&info->dead);
+				pthread_mutex_unlock(&info->full);
 				return ;
+			}
+			pthread_mutex_unlock(&info->full);
 			i++;
 		}
 		usleep(10);
