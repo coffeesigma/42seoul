@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 06:34:51 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 10:08:25 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:40:31 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	*philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2)
 		usleep(500);
-	while (philo->info->is_dead == 0)
+	while (check_is_dead(philo->info) == 0)
 	{
 		philo_eat(philo);
 		if (philo_is_full(philo))

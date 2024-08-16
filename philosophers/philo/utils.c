@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 04:50:09 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 10:16:29 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:37:22 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	philo_usleep(int time, t_info *info)
 {
 	struct timeval	start;
 
-	if (info->is_dead)
+	if (check_is_dead(info))
 		return ;
 	gettimeofday(&start, NULL);
 	usleep(time * 0.7 * 1000);

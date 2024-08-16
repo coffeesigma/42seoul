@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 09:24:38 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 10:13:02 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:43:05 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ static int	philo_is_dead(t_philo *philo)
 	time_diff = get_time(philo->last_meal);
 	if (time_diff > philo->info->time_to_die)
 	{
+		pthread_mutex_lock(&philo->info->dead);
 		philo->info->is_dead = 1;
 		pthread_mutex_lock(&philo->info->print);
 		printf("%d %d died\n", get_time(philo->info->start), philo->id);
 		pthread_mutex_unlock(&philo->info->print);
+		pthread_mutex_unlock(&philo->info->dead);
 		return (1);
 	}
 	return (0);

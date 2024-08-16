@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:30:35 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 09:38:22 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:49:44 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_info
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*philos;
+	pthread_mutex_t	dead;
 	pthread_mutex_t	full;
 	struct timeval	start;
 }	t_info;
@@ -54,6 +55,7 @@ int		ft_atoi(const char *str);
 int		get_time(struct timeval start);
 void	philo_usleep(int time, t_info *info);
 void	philo_printf(t_philo *philo, char *msg);
+int		check_is_dead(t_info *info);
 // init.c
 int		init_info(t_info *info, int argc, char **argv);
 int		init_philos(t_philo **philos, t_info *info);
@@ -61,6 +63,5 @@ int		init_philos(t_philo **philos, t_info *info);
 void	*philo_routine(void *arg);
 // simulation.c
 int		start_simulation(t_philo *philos, t_info *info);
-//int	philo_is_full(t_philo *philo);
 
 #endif

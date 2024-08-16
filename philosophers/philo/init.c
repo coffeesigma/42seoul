@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 05:36:41 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 10:12:43 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:41:25 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	init_mutexes(t_info *info)
 		i++;
 	}
 	if (pthread_mutex_init(&info->print, NULL)
-		|| pthread_mutex_init(&info->full, NULL))
+		|| pthread_mutex_init(&info->full, NULL)
+		|| pthread_mutex_init(&info->dead, NULL))
 		return (1);
 	return (0);
 }
