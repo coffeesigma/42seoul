@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:16:14 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 12:13:57 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/17 19:33:21 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,23 @@ int	check_is_dead(t_info *info)
 	}
 	pthread_mutex_unlock(&info->dead);
 	return (0);
+}
+
+void	free_all(t_philo *philos, t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->num_of_philos)
+	{
+		pthread_mutex_destroy(&info->philos[i]);
+		pthread_mutex_destroy(&info->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&info->print);
+	pthread_mutex_destroy(&info->dead);
+	pthread_mutex_destroy(&info->full);
+	free(philos);
+	free(info->forks);
+	free(info->philos);
 }

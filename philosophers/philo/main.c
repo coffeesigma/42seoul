@@ -6,7 +6,7 @@
 /*   By: jeongbel <jeongbel@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:24:06 by jeongbel          #+#    #+#             */
-/*   Updated: 2024/08/16 09:53:30 by jeongbel         ###   ########.fr       */
+/*   Updated: 2024/08/17 19:31:11 by jeongbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	main(int argc, char **argv)
 		return (print_error("Error: Failed to initialize philos\n"));
 	if (start_simulation(philos, &info))
 		return (print_error("Error: Failed to start simulation\n"));
+	free_all(philos, &info);
 	return (0);
 }
