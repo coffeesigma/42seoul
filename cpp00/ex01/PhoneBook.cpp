@@ -75,6 +75,9 @@ void PhoneBook::SearchContact() {
 	displayAllContacts();
 	std::cout << "Enter the index you are looking for." << std::endl;
 	std::cin >> index;
+	if (std::cin.eof()) {
+		return ;
+	}
 	if (std::cin.fail()) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
